@@ -8,6 +8,8 @@ verify_ssl = true
 [packages]
 django = "*"
 pysftp = "*"
+bump2version = "*"
+django-watson = "*"
 
 [requires]
 python_version = "3.8"

@@ -1,0 +1,15 @@
+.table.bg-info {
+    color: #d8e0e8;
+}
+
+.sidebar .nav-item .nav-link {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.sidebar .nav-item .nav-link:active, .sidebar .nav-item .nav-link:focus, .sidebar .nav-item .nav-link:hover {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.card a {
+    color: #dddddd;
+}

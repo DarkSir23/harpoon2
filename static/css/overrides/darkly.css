@@ -1,0 +1,19 @@
+.table.bg-info {
+    color: #d8e0e8;
+}
+
+.table {
+    color: #212529;
+}
+
+.table th {
+    color: #dddddd;
+}
+
+.datatable th {
+    color: #dddddd;
+}
+
+.datatable td {
+    color: #2b2b2b;
+}
