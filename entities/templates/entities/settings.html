@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+
+{% for folder in folders %}
+<div>{{ folder }}</div>
+{% endfor %}
+<button type="button" id="add-folder" class="bs-modal btn btn-sm btn-primary" data-form-url="{% url 'entities:dlfolder_create' %}"><i class="fa fa-fw fa-plus-circle"></i></button>
+{% endblock %}

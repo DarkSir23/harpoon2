@@ -35,8 +35,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_beat',
     'watson',
-    'entities',
+    'entities.apps.EntitiesConfig',
+    'itemqueue.apps.ItemqueueConfig',
+    'users.apps.UsersConfig',
+    'crispy_forms',
+    'bootstrap_modal_forms',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +55,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'harpoon2.urls'
+
+AUTH_USER_MODEL = 'users.CustomUser'
 
 TEMPLATES = [
     {
@@ -91,6 +98,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# REDIS related settings
+REDIS_HOST = 'localhost'
+REDIS_PORT = '6379'
+BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -113,7 +127,45 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 from .secrets import *
 
 INTERFACE = 'united'
+
+THEMES = [('cerulean', 'Cerulean'),
+          ('cosmo', 'Cosmo'),
+          ('cyborg', 'Cyborg'),
+          ('darkly', 'Darkly'),
+          ('flatly', 'Flatly'),
+          ('journal', 'Journal'),
+          ('litera', 'Literia'),
+          ('lumen', 'Lumen'),
+          ('lux', 'Lux'),
+          ('materia', 'Materia'),
+          ('minty', 'Minty'),
+          ('pulse', 'Pulse'),
+          ('sandstone', 'Sandstone'),
+          ('simplex', 'Simplex'),
+          ('sketchy', 'Sketchy'),
+          ('slate', 'Slate'),
+          ('solar', 'Solar'),
+          ('spacelab', 'Spacelab'),
+          ('superhero', 'Superhero'),
+          ('united', 'United'),
+          ('yeti', 'Yeti')]
+
+MANAGER_TYPES = [
+    ('Sonarr', 'Sonarr'),
+    ('Radarr', 'Radarr'),
+    ('Lidarr', 'Lidarr'),
+    ('Readarr', 'Readarr'),
+    ('LazyLibrarian', 'LazyLibrarian'),
+    ('Mylar', 'Mylar'),
+]
+
+DOWNLOADER_TYPES = [
+    ('RTorrent', 'RTorrent'),
+    ('SABNzbd', 'SABNzbd'),
+]

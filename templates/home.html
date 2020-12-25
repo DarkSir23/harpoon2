@@ -3,5 +3,19 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+    <div class="card-deck">
+    {% for manager in managers %}
+        <div id="manager_info" class="card bg-dark text-white" style="width: 20rem;">
 
+            <div class="card-header bg-primary"><h4 class="card-title">{{ manager.name }}</h4>
+            </div>
+            <div class="card-body px-1">
+                <div><b>URL:</b> {{ manager.url }}</div>
+                <div><b>Label:</b> {{ manager.label }}</div>
+                <div><b>Folder:</b> {{ manager.folder }}</div>
+                <div><b>Version:</b> {{ manager.client.test.1.version }}</div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
 {% endblock %}

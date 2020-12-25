@@ -72,11 +72,10 @@
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
               {%  if user.is_authenticated %}
                 <a class="dropdown-item" href="{% url 'users:userprefs' %}">My Dashboard</a>
-                <a class="dropdown-item" href="{% url 'users:activityjson' user.id  %}">Activity Log</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="${http_root}auth/login" data-toggle="modal" data-target="#logoutModal">Logout</a>
               {%  else %}
-{#                <a class="dropdown-item" href="{% url 'account_login' %}">Login</a>#}
+                <a class="dropdown-item" href="{% url 'login' %}">Login</a>
               {% endif %}
           </div>
         </li>
@@ -104,8 +103,8 @@
                     </a>
                     <div class="collapse" id="collapseConfig" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="#">Local Config</a>
-                            <a class="nav-link" href="#">Managers</a>
+                            <a class="nav-link" href="{% url 'entities:settings' %}">Local Config</a>
+                            <a class="nav-link" href="{% url 'entities:managers' %}">Managers</a>
                             <a class="nav-link" href="#">Seedboxes</a>
                             <a class="nav-link" href="#">Downloaders</a>
                         </nav>
@@ -171,10 +170,15 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-{#            <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>#}
+            <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
           </div>
         </div>
       </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content"></div>
+        </div>
     </div>
     {%  endblock %}
     {% block basescripts %}
@@ -193,6 +197,7 @@
     <script src="{% static 'js/jquery.easing.min.js' %}"></script>
     <script src="{% static 'js/Chart.min.js' %}"></script>
     <script src="{% static 'js/sb-admin.js' %}?v=2"></script>
+        <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
     <script type="text/javascript" charset="utf8" src="{% static 'js/datatableview.js' %}?{% now "U" %}"></script>
     <script type="text/javascript">
         $(function(){
@@ -209,5 +214,14 @@
     {% endblock %}
     {% block scripts %}
     {% endblock %}
+<script>
+    $(function () {
+        $(".bs-modal").each(function () {
+            $(this).modalForm({
+                formURL: $(this).data('form-url')
+            });
+        });
+    });
+</script>
 </body>
 </html>

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}User Details - {{ thisuser.username }} {% endblock %}
+
+{% block content %}
+
+    <div class="card-deck py-4">
+        <div id="user_info" class="card bg-primary text-white">
+            <div class="card-header"><h4 class="card-title">{{ thisuser.username }}</h4></div>
+            <div class="card-body px-1">
+                <div><b>Theme:</b> {{ thisuser.interface }}</div>
+                <div><b>Last Login:</b> {{ thisuser.last_login }}</div>
+                <div><b>Groups:</b>
+                    {% for group in thisuser.groups.all %}
+                    <div>{{ group.name }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div id="user_info" class="card bg-primary text-white">
+            <div class="card-header"><h4 class="card-title">Permissions</h4></div>
+            <div class="card-body px-1 scroll">
+                {% for perm in thisuser.get_all_permissions %}
+                    <div>{{ perm }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div role="tab-table" class="hidden">
+        <div>
+            <ul class="nav nav-pills" role="tablist" id="usertabs">
+                <li class=nav-item">
+                    <a id="activity-tab" class="nav-link active" role="tab" data-toggle="tab" aria-controls="activity" href="#activity" aria-selected="true">Activity</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="tabcontent">
+                <div role="tabpanel" class="tab-pane fade show active" id="activity" aria-labelledby="activity-tab">
+                    <div class="table-responsive" id="historytablediv">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+{%  block scripts %}
+{% endblock %}
+{% block embedtables %}
+       $('#historytablediv').load('{% url 'users:activityjsontable' thisuser.id %}?embed=1', function() {datatableview.initialize('#historytablediv table');});
+{% endblock %}

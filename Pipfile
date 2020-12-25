@@ -10,6 +10,13 @@ django = "*"
 pysftp = "*"
 bump2version = "*"
 django-watson = "*"
+django-crispy-forms = "*"
+django-bootstrap-modal-forms = "*"
+requests = "*"
+celery = "==5.0.0rc3"
+redis = "*"
+django-celery-beat = "*"
+rtorrent-python = "*"
 
 [requires]
 python_version = "3.8"
