@@ -3,6 +3,10 @@ from itemqueue.models import Item, ItemHistory
 from django.db import models
 from rtorrent import RTorrent as rtorclient
 
+class SABnzbd(object):
+    def __init__(self):
+        pass
+
 class RTorrent(object):
     def __init__(self, downloader):
         self.downloader = downloader

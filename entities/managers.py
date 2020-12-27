@@ -97,6 +97,7 @@ class Readarr(Arr):
         url = self.apiurl + '/queue'
         try:
             r = requests.get(url, params=None, headers=self.headers)
+            print(r.json())
             dt = self.parse_queue(r.json()['records'])
             return True, dt
         except Exception as e:

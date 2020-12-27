@@ -1,6 +1,6 @@
 from bootstrap_modal_forms.forms import BSModalModelForm
 from django.forms import ValidationError
-from .models import DownloadFolder, Manager
+from .models import DownloadFolder, Manager, Downloader
 import os
 
 class DLFolderModalForm(BSModalModelForm):
@@ -28,5 +28,19 @@ class DLFolderModalForm(BSModalModelForm):
 class ManagerModalForm(BSModalModelForm):
     class Meta:
         model = Manager
+        exclude = ['pk']
+
+class DownloaderModalForm(BSModalModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(SchoolModelForm, self).__init__(*args, **kwargs)
+        if hasattr(self, 'instance'):
+            options = self.instance.options
+            for item in options.keys():
+                self.fields[f'opt_{item}'] = forms.CharField(required=False, label=f'Personnel ({group})', widget=forms.Textarea)
+                self.fields[f'opt_{item}'].initial = PersonList(self.instance.personnel[group]).to_string()
+
+    class Meta:
+        model = Downloader
         exclude = ['pk']
 
